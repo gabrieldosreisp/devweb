@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Empreendimento</title>
+</head>
+<body>
+    <h1>Detalhes do Empreendimento</h1>
+    <h2>{{ empreendimento.nome }}</h2>
+    <p>Descrição: {{ empreendimento.descricao }}</p>
+    <p>Tipo de Empreendimento: {{ empreendimento.get_tipo_empreendimento_display }}</p>
+
+    <h2>Unidades</h2>
+    <ul>
+        {% for unidade in unidades %}
+            <li>
+                Unidade {{ unidade.numero }} - Status: {{ unidade.status }}
+                {% if unidade.status == 'Disponível' %}
+                    <button onclick="openModal('{{ unidade.id }}')">Reservar Unidade</button>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Modal de Reserva -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Reserva de Unidade</h2>
+            <form id="reservaForm">
+                {% csrf_token %}
+                <input type="hidden" name="unidade_id" id="unidade_id" value="">
+                <input type="text" name="nome_cliente" id="nome_cliente" placeholder="Nome do Cliente">
+                <button type="button" onclick="submitReserva()">Reservar Unidade</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(unidadeId) {
+            document.getElementById('unidade_id').value = unidadeId;
+            document.getElementById('myModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        function submitReserva() {
+            const unidadeId = document.getElementById('unidade_id').value;
+            const nomeCliente = document.getElementById('nome_cliente').value;
+
+            fetch("{% url 'reservar_unidade' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: `unidade_id=${unidadeId}&nome_cliente=${nomeCliente}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    closeModal();
+                    location.reload();  // Atualizar a página após a reserva bem-sucedida
+                } else {
+                    alert(data.message);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

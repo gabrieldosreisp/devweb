@@ -1,0 +1,35 @@
+/* Adicione estilos personalizados aqui */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 50px;
+}
+
+h1 {
+    color: #333;
+}
+
+p {
+    font-size: 18px;
+    color: #666;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Estilos para o botão de login do Admin */
+.button.admin-login {
+    background-color: #4CAF50;
+}
+
+.button.admin-login:hover {
+    background-color: #45a049;
+}

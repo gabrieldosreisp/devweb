@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Listagem de Empreendimentos</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <h1>Bem-vindo à Página Restrita, {{ user.username }}!</h1>
+
+        <h1>Listagem de Empreendimentos</h1>
+
+        <ul>
+            {% for empreendimento in empreendimentos %}
+                <li>
+                    <a href="{% url 'detalhes_empreendimento' empreendimento_id=empreendimento.id %}">
+                        {{ empreendimento.nome }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Você precisa estar logado para acessar esta página.</p>
+    {% endif %}
+    
+    
+</body>
+</html>

@@ -1,0 +1,12 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+  <div class="model-reservar_unidade">
+    <h1>Reservar Unidade</h1>
+    <form method="post" action="">
+      {% csrf_token %}
+      {{ reserva_form.as_p }}
+      <button type="submit">Confirmar Reserva</button>
+    </form>
+  </div>
+{% endblock %}

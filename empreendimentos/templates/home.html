@@ -1,0 +1,14 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página Inicial</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>Bem-vindo à Página Inicial</h1>
+    <p>Esta é a sua página inicial personalizada.</p>
+    <a href="{% url 'admin:index' %}" class="button">Acessar o Django Admin</a>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{% extends 'admin/base_site.html' %}
+
+{% block content %}
+<div class="module">
+    <form method="post" enctype="multipart/form-data" action="{% url 'admin:empreendimentos_empreendimento_importar_excel' empreendimento.id %}">
+        {% csrf_token %}
+        <input type="file" name="excel_file" required>
+        <button type="submit">Importar Excel</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+.navbar-white {
+    background-color: #fc1313;
+    color: #1f2d3d;
+}
+
+.sidebar-collapse.sidebar-mini .main-sidebar .sidebar, .sidebar-collapse.sidebar-mini-md .main-sidebar .sidebar, .sidebar-collapse.sidebar-mini-xs .main-sidebar .sidebar {
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    scrollbar-width: none;
+    background-color: #fc1313!important;
+}

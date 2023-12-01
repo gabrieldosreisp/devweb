@@ -1,0 +1,8 @@
+{% extends 'admin/base_site.html' %}
+
+{% block content %}
+<div class="module">
+    <p>Unidades importadas com sucesso para o empreendimento {{ empreendimento }}.</p>
+    <a href="{% url 'admin:empreendimentos_empreendimento_changelist' %}">Voltar para a lista de empreendimentos</a>
+</div>
+{% endblock %}
