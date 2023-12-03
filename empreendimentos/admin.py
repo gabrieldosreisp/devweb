@@ -5,14 +5,14 @@ from django.urls import path
 from django.shortcuts import render
 from .models import Empreendimento, Unidade
 
-class UnidadeInline(admin.TabularInline):
+class UnidadeInline(admin.StackedInline ):
     model = Unidade
-    extra = 3  # Define quantos formulários de unidades serão exibidos por padrão
+    extra = 1 # Define quantos formulários de unidades serão exibidos por padrão
 
 class EmpreendimentoAdmin(admin.ModelAdmin):
     inlines = [UnidadeInline]
     
-    list_display = ('nome', 'tipo_empreendimento')
+    list_display = ('nome', 'tipo_empreendimento', 'imagem', 'material_divulgacao')
 
     actions = ['alterar_status_disponivel', 'alterar_status_reservado', 'alterar_status_vendido']
 

@@ -32,10 +32,15 @@
 </head>
 <body>
     
-    <h1>Detalhes do Empreendimento</h1>
-    <h2>{{ empreendimento.nome }}</h2>
+    <h1>{{ empreendimento.nome }}</h1>
     <p>Descrição: {{ empreendimento.descricao }}</p>
     <p>Tipo de Empreendimento: {{ empreendimento.get_tipo_empreendimento_display }}</p>
+    {% if empreendimento.material_divulgacao %}
+        <p>Material de Divulgação: <a href="{{ empreendimento.material_divulgacao }}" target="_blank">Link</a></p>
+    {% else %}
+        <p>Sem material de divulgação disponível.</p>
+    {% endif %}
+
 
     <div class="my-class" role="region" tabindex="0">
     <h2>Unidades</h2>
