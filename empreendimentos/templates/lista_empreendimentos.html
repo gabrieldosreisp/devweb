@@ -2,21 +2,39 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <link rel="icon" href="{% static 'img/iconapp.png' %}" type="image/png">
+
     <meta charset="UTF-8">
-    <title>Listagem de Empreendimentos</title>
+    <title>Listade Empreendimentos</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
     {% if user.is_authenticated %}
-        
     <div class="container">
-            <h1>Bem-vindo à Página Restrita, {{ user.username }}!</h1>
-            <h1>Listagem de Empreendimentos</h1>
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+            <img class="my-0 mr-md-auto font-weight-normal" src="/static/media/logopreta.png" width="150px">
+            <nav class="my-2 my-md-0 mr-md-3">
+              <a class="p-2 text-dark" href="/lista_empreendimentos">Empreendimentos</a>
+              <a class="p-2 text-dark" href="/faq/">FAQ</a>
+              <a class="p-2 text-dark" href="https://api.whatsapp.com/send/?phone=55048988150135&text&type=phone_number&app_absent=0">Suporte</a>
+            </nav>
+            {% if user.is_authenticated %}
+                <a class="btn btn-outline-primary" href="{% url 'logout' %}">Logout</a>
+            {% endif %}
+    
+        </div> 
+    
+      <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h2 class="display-4">Explore Nossos Empreendimentos Exclusivos {{ user.username }}!</h2>
+        <p class="lead">Descubra uma seleção única de empreendimentos e loteamentos projetados para superar suas expectativas. Cada propriedade é cuidadosamente escolhida para oferecer não apenas um lar, mas uma experiência de vida excepcional.</p>
+      </div>
+    
+      <div class="container">
             <div class="card-deck">
                 {% for empreendimento in empreendimentos %}
                     <div class="card">
                         {% if empreendimento.imagem %}
-                            <img class="card-img-top" src="{{ empreendimento.imagem.url }}" alt="{{ empreendimento.nome }}" style="width: 100%; height: 200px; object-fit: cover;">
+                            <img class="card-img-top" src="{{ empreendimento.imagem.url }}" alt="{{ empreendimento.nome }}" style="width: 100%; height: 300px; object-fit: cover;">
                         {% else %}
                             <p class="text-center">Sem imagem disponível</p>
                         {% endif %}
@@ -24,16 +42,26 @@
                             <a href="{% url 'detalhes_empreendimento' empreendimento_id=empreendimento.id %}">
                                 <h5 class="card-title">{{ empreendimento.nome }}</h5>
                             </a>
-                            <p class="card-text">{{ empreendimento.descricao }}</p>
+                            
                             <p class="card-text"><small class="text-muted">Tipo de Empreendimento: {{ empreendimento.get_tipo_empreendimento_display }}</small></p>
                         </div>
                     </div>
                 {% endfor %}
             </div>
         </div>
+    </div>
     {% else %}
         <p>Você precisa estar logado para acessar esta página.</p>
     {% endif %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <span class="text-muted" style="display: block; text-align: center;">© 2023 Gabriel dos Reis Pereira. Todos os direitos reservados.</span>
+        </div>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

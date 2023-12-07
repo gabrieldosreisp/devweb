@@ -11,6 +11,9 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     return render(request, 'home.html')
 
+def faq(request):
+    return render(request, 'faq.html')
+
 
 def cadastrar_empreendimento(request):
     if request.method == 'POST':
@@ -96,6 +99,8 @@ def reservar_unidade(request, empreendimento_id):
         form = ReservaUnidadeForm(empreendimento, request.POST)
         if form.is_valid():
             unidade_reservada = form.cleaned_data['unidade']
+            # Certifique-se de que o usuário atual esteja associado à reserva
+            unidade_reservada.reservado_por = request.user
             unidade_reservada.status = 'reservada'
             unidade_reservada.save()
             return redirect('detalhes_empreendimento', empreendimento_id=empreendimento.id)
@@ -103,7 +108,6 @@ def reservar_unidade(request, empreendimento_id):
         form = ReservaUnidadeForm(empreendimento)
 
     return render(request, 'detalhes_empreendimento.html', {'empreendimento': empreendimento, 'unidades': unidades_disponiveis, 'form': form})
-
 
 
 def login_view(request):
@@ -123,4 +127,4 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('página_inicial')
+    return redirect('/')

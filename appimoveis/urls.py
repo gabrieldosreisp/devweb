@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from empreendimentos import views
-from empreendimentos.views import reservar_unidade, detalhes_empreendimento, login_view, logout_view
+from empreendimentos.views import reservar_unidade, detalhes_empreendimento, login_view, logout_view, faq
 
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('faq/', faq, name='faq'),
     path('admin/', admin.site.urls),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),

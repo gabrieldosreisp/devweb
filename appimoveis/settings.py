@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from os import path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +27,7 @@ SECRET_KEY = '@v_hn^)e1+g#ww=-87&!oxdqgakb0e%oz5@)!7(g-!5d@$aikr'
 DEBUG = True
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -93,8 +92,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'appimoveis',
         'USER': 'admin',
-        'PASSWORD': '123456',
-        'HOST': '127.0.0.1',  # Ou o endereço do servidor MySQL
+        'PASSWORD': 'Sombrio#2020',
+        'HOST': 'appimoveis.cl0c8vfxyk8p.us-east-2.rds.amazonaws.com',  # Ou o endereço do servidor MySQL
         'PORT': '3306',       # A porta padrão do MySQL é 3306
     }
 }
@@ -141,9 +140,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS =[
     path.join(BASE_DIR, 'static')
 ]
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
 
 JAZZMIN_SETTINGS = {
     "show_ui_builder": None,
